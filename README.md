@@ -1,5 +1,5 @@
-# BW2Searcher
-BW2SearcherはBW2専用のパラメータ特定ツールです.
+# BW2PrmSearcher
+BW2PrmSearcherはBW2専用のパラメータ特定ツールです.
 
 Config.txtで各種パラメータを設定することで,
  - ゲーム起動時のパラメータの特定
