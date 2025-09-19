@@ -61,15 +61,33 @@ internal class PrmSearcher
                 Console.WriteLine("[年, 月, 秒, 時, 分, 秒, VCount, Timer0, 初期SEED]\n");
                 writer.WriteLine("[年, 月, 秒, 時, 分, 秒, VCount, Timer0, 初期SEED]\n");
 
+                int Flag = 0;
+
                 for (DateTime Dt = PID.InDt; Dt <= PID.EnDt; Dt = Dt.Add(PID.increment))     //初期SEED
                 {
+
+                    if(Dt > PID.EnDt)
+                    {
+                        break;
+                    }
+
+                    if (CountFlag > 0 && CountFlag == Flag)
+                    {
+                        break;
+                    }
+
                     for (uint Timer0 = PID.InTimer0; Timer0 < PID.EnTimer0 + 1; Timer0++)
                     {
                         PID.Dt = Dt;
                         PID.Timer0 = Timer0;
                         InSeedData SeedData = PID.GenSeed();
                         ulong Seed = SeedData.Seed;
-                        int Flag = 0;
+
+
+                        if (CountFlag > 0 && CountFlag == Flag)
+                        {
+                            break;
+                        }
 
                         for (int Count = 0; Count < PID.PIDCount; Count++, Seed = NextSeed(Seed))   //PID
                         {
@@ -130,7 +148,7 @@ internal class PrmSearcher
                                 SelectedPokemon.Add(SelectedIndex.PokemonName);
                                 SelectedItem.Add(SelectedIndex.ItemName);
 
-                                if (targetSet.Count == 6 && !targetSet.IsSupersetOf(SelectedPokemon))
+                                if (targetSet.Count > i && !targetSet.IsSupersetOf(SelectedPokemon))
                                 {
                                     break;
                                 }
@@ -164,7 +182,10 @@ internal class PrmSearcher
 
                                 Flag += 1;
 
-                                if (CountFlag > 0 && CountFlag == Flag) return;
+                                if (CountFlag > 0 && CountFlag == Flag)
+                                {
+                                    break;
+                                }
                             }
                         }
                     }
@@ -173,7 +194,7 @@ internal class PrmSearcher
                 Console.WriteLine("======================================");
             }
 
-        } while (Console.ReadKey().Key == ConsoleKey.R);
+        } while (Console.ReadKey().KeyChar == '　');
     }
 
     static ulong NextSeed(ulong PWTSeed)
