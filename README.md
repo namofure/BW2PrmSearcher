@@ -42,6 +42,7 @@ Config.txtの各種パラメータを参照して性格値乱数初期SEEDの検
 (https://namofure.hatenablog.com/entry/20250920/1758294885)
 
 ## バージョン情報
+ - v1.0.1 検索処理の修正
  - v1.0.0 初版
 
 ## 製作者
